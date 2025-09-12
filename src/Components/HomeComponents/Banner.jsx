@@ -34,7 +34,7 @@ const Banner = () => {
           <SwiperSlide key={idx}>
             <div className="relative w-full h-full">
               <img src={image} className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-black/30"></div>
+              <div className="absolute inset-0 bg-linear-to-br from-black/50 to-black/30"></div>
             </div>
           </SwiperSlide>
         ))}

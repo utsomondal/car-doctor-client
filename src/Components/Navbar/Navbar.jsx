@@ -1,7 +1,21 @@
 import { Link } from "react-router";
 import logo from "../../assets/logo.svg";
+import { useAuth } from "../../Context/useAuth";
 
 const Navbar = () => {
+  const { user, setLoading, logoutUser, loading } = useAuth();
+
+  const handleLogout = () => {
+    logoutUser()
+      .then(() => {
+        alert("User Logged Out");
+        setLoading(false);
+      })
+      .catch((error) => {
+        alert("error:", error);
+      });
+  };
+
   const navLinks = (
     <>
       <li>
@@ -92,9 +106,31 @@ const Navbar = () => {
             />{" "}
           </svg>
         </button>
-        <Link to="/login">
-          <button className="btn btn-outline">Login</button>
-        </Link>
+        {user ? (
+          <>
+            <div className="flex items-center gap-2">
+              <img
+                src="https://i.postimg.cc/jd284Pdk/user.png"
+                alt="user"
+                className="w-12 border-2 border-blue-300 rounded-full"
+              />
+              <button onClick={handleLogout} className="btn btn-outline">
+                {loading ? (
+                  <>
+                    <span className="loading loading-spinner loading-sm"></span>
+                    Logging out...
+                  </>
+                ) : (
+                  "Logout"
+                )}
+              </button>
+            </div>
+          </>
+        ) : (
+          <Link to="/login">
+            <button className="btn btn-outline">Login</button>
+          </Link>
+        )}
       </div>
     </div>
   );

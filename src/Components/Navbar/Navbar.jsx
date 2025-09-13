@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import logo from "../../assets/logo.svg";
 import { useAuth } from "../../Context/useAuth";
+import logo from "../../assets/logo.svg";
 
 const Navbar = () => {
   const { user, setLoading, logoutUser, loading } = useAuth();
@@ -19,13 +19,13 @@ const Navbar = () => {
   const navLinks = (
     <>
       <li>
-        <a>Home</a>
+        <Link to="/">Home</Link>
       </li>
       <li>
         <a>About</a>
       </li>
       <li>
-        <a>Services</a>
+        <Link to="/services">Services</Link>
       </li>
       <li>
         <a>Blog</a>

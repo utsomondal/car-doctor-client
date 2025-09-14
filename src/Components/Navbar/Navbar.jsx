@@ -27,11 +27,18 @@ const Navbar = () => {
       <li>
         <Link to="/services">Services</Link>
       </li>
-      <li>
-        <a>Blog</a>
-      </li>
+      {user ? (
+        <li>
+          <Link to="/my-orders">My Orders</Link>
+        </li>
+      ) : (
+        ""
+      )}
       <li>
         <a>Contact</a>
+      </li>
+      <li>
+        <a>Blog</a>
       </li>
     </>
   );

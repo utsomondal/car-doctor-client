@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router";
-import { useAuth } from "../Context/useAuth";
+import useAuth from "../Hooks/useAuth";
 
 const CheckoutPage = () => {
   const service = useLoaderData();
@@ -35,7 +35,7 @@ const CheckoutPage = () => {
       serviceStatus: "pending",
     };
 
-    fetch("http://localhost:3000/orders", {
+    fetch("https://car-doctor-server-murex-gamma.vercel.app/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",

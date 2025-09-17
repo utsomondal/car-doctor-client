@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import { useAuth } from "../../Context/useAuth";
 import logo from "../../assets/logo.svg";
+import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
   const { user, setLoading, logoutUser, loading } = useAuth();

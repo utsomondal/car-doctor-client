@@ -7,7 +7,7 @@ const ServicesPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/services")
+    fetch("https://car-doctor-server-murex-gamma.vercel.app/services")
       .then((res) => res.json())
       .then((data) => {
         setServices(data);

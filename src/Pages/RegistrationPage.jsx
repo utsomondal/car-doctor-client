@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router";
-import { useAuth } from "../Context/useAuth";
+import useAuth from "../Hooks/useAuth";
 
 const RegistrationPage = () => {
   const { registerUser, setLoading, loading } = useAuth();
@@ -26,7 +26,6 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div>
       <div className="hero min-h-[calc(100vh-364px)]">
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-xl border border-gray-400">
           <h1 className="text-3xl font-bold text-center border-b border-gray-400 py-3">
@@ -75,7 +74,6 @@ const RegistrationPage = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

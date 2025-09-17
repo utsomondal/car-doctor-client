@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../Utils/AuthContext";
 import auth from "../Firebase/firebase.config";
 import {
   createUserWithEmailAndPassword,
@@ -10,6 +10,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -27,7 +28,9 @@ const AuthProvider = ({ children }) => {
 
   const logoutUser = () => {
     setLoading(true);
-    return signOut(auth);
+    return signOut(auth).finally(() => {
+      setLoading(false);
+    });
   };
 
   const googleAuth = () => {
@@ -44,8 +47,25 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const userEmail = currentUser?.email;
+      const loggedUser = { email: userEmail };
+
       setUser(currentUser);
       setLoading(false);
+      // if current user exist issue a token
+      if (currentUser) {
+        axios.post("https://car-doctor-server-murex-gamma.vercel.app/login", loggedUser, {
+          withCredentials: true,
+        });
+      } else {
+        axios.post(
+          "https://car-doctor-server-murex-gamma.vercel.app/logout",
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+      }
     });
     return () => unsubscribe();
   }, []);
